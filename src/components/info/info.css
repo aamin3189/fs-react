@@ -1,0 +1,8 @@
+.info{
+    width: 200px;
+    height: 200px;
+    background: rgb(245, 244, 244);
+    margin-right: 20px;
+    padding: 5px;
+    border-radius: 4px;
+}
