@@ -30,8 +30,6 @@ function App() {
 
   const [students, setStudents] = useState(studentsMock);
 
-  const navigate = useNavigate();
-
   function deleteStudent(e,retunedIndex){
     let newStd = _.clone(students);
     newStd.splice(retunedIndex, 1);
