@@ -1,14 +1,15 @@
 import React,{useState} from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
+const EditStudent = ({updateStudent}) => {
 
-const AddStudent = ({onSave}) => {
+    const location = useLocation();
+    console.log(location)
 
     const navigate = useNavigate();
+    console.log(navigate)
 
-    const [student, setStudent] = useState({
-        name: '', age: 0, city: ''
-    });
+    const [student, setStudent] = useState(location.state.student);
 
     function changeVals(e){
         console.log(e.target.value);
@@ -32,13 +33,13 @@ const AddStudent = ({onSave}) => {
                     <input type="text" name="city" onChange={changeVals} value={student.city}  placeholder="Student City" />
                 </div>
                 <button style={{marginTop: '15px'}} onClick={()=>{
-                    onSave(student);
-                    navigate('/');
+                    updateStudent(student, location.state.index);
                     // Redirect to Listing page Page
+                    navigate('/')
                 }} className="add-button">Save Student</button>
             </div>
         </div>
     );
 };
 
-export default AddStudent;
+export default EditStudent;
