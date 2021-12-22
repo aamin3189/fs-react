@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import Header from './components/header/Header';
 import './App.css';
 import { Routes, Route, useNavigate } from "react-router-dom";
@@ -6,29 +6,28 @@ import _ from 'underscore';
 import StudentList from './pages/StudentList';
 import AddStudent from './pages/AddStudent';
 import EditStudent from './pages/EditStudent';
+import Axios from 'axios';
 
-
-const studentsMock = [
-  {
-    name: 'Waseem',
-    age: 20,
-    city: 'Hojai'
-  },
-  {
-    name: 'Pankaj',
-    age: 25,
-    city: 'Dibrugarh'
-  },
-  {
-    name: 'Deepak',
-    age: 25,
-    city: 'Guwahati'
-  }
-]
+const studentsMock = []
 
 function App() {
 
   const [students, setStudents] = useState(studentsMock);
+
+
+  useEffect(()=>{
+    // execute 
+    // Whenever this component is mounted
+    getStudents();
+  },[]);
+
+
+
+  async function getStudents(){
+    const stds = await Axios.get('http://localhost:3000/students');
+    setStudents(stds.data);
+  }
+
 
   function deleteStudent(e,retunedIndex){
     let newStd = _.clone(students);
